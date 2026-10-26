@@ -118,7 +118,7 @@ function state()
     -- Limit string to 17 chars, sometimes odd chars are added at the end 
     current.menTxt1 = string.sub (readAddress("string17", 0xA2C380), 1, 17)
     -- Holds "1" once "START RACE" is selected, and "0" once back in menu
-    current.raceEngaged = readAddress("byte", 0xEB448, 0x238)
+    current.levelEngaged = readAddress("byte", 0xEB448, 0x238)
 
 -- Nil guarded addresses, since they don't always hold a value, fixes bitwise errors
     current.selTrk = nilGuard(readAddress("byte", 0xBFDB8, 0x5D),
@@ -148,7 +148,7 @@ function start()
     vars.loadBufferSize = 0
     -- Auto start trigger based on sets
     if sets.startRaceTrig then
-        return current.raceEngaged == 1 and old.raceEngaged == 0
+        return current.levelEngaged == 1 and old.levelEngaged == 0
     end
     return current.menTxt1 == "~F6~sBack" and old.menTxt1 == "~F6Current Player"
 end
